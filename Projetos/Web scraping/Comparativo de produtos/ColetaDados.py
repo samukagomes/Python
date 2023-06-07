@@ -125,9 +125,11 @@ def executa_class(produto):
 window = Tk()
 #adiciona o titulo na pagina
 window.title("Projeto de Webscraping")
+window.geometry('500x300')
 Label(window, text='Escreva o produto que deseja pesquisar: ').grid()
-pesquisa = Entry(window, textvariable=UserWarning)
-pesquisa.grid()
+
+pesquisa = Entry(window, ).grid()
+
 
 btn_pesquisa = ttk.Button(window, text="pesquisar", command=lambda:(executa_class(pesquisa)))
 btn_pesquisa.grid()

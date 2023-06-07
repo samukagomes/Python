@@ -110,7 +110,8 @@ class ColetaDadosSite():
         df = pd.concat([df_amz, df_ali], ignore_index=True)
         print(df)
 
-def executa_class(produto):
+def executa_class():
+    produto = input('Escreva o nome do produto que deseja pesquisar: ')
     novo = ColetaDadosSite(produto)
     novo.iniciar_navegador()
     novo.pesquisa_amz() 
@@ -120,17 +121,4 @@ def executa_class(produto):
     novo.fechar_navegador()
     novo.dataFrame()
 
-
-#cria a janela do programa
-window = Tk()
-#adiciona o titulo na pagina
-window.title("Projeto de Webscraping")
-window.geometry('500x300')
-Label(window, text='Escreva o produto que deseja pesquisar: ').grid()
-
-pesquisa = Entry(window, ).grid()
-
-
-btn_pesquisa = ttk.Button(window, text="pesquisar", command=lambda:(executa_class(pesquisa)))
-btn_pesquisa.grid()
-window.mainloop()
+executa_class()

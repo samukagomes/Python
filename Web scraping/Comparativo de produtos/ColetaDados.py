@@ -16,7 +16,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 
 
-class PesquisaSite():
+class ColetaDadosSite():
     def __init__(self, nomeProduto):
         self.nomeProduto = nomeProduto
 
@@ -111,7 +111,7 @@ class PesquisaSite():
         print(df)
 
 def executa_class(produto):
-    novo = PesquisaSite(produto)
+    novo = ColetaDadosSite(produto)
     novo.iniciar_navegador()
     novo.pesquisa_amz() 
     novo.coleta_dados_amz()
@@ -129,6 +129,6 @@ Label(window, text='Escreva o produto que deseja pesquisar: ').grid()
 pesquisa = Entry(window, textvariable=UserWarning)
 pesquisa.grid()
 
-btn_pesquisa = ttk.Button(window, text="pesquisar", command=executa_class)
+btn_pesquisa = ttk.Button(window, text="pesquisar", command=lambda:(executa_class(pesquisa)))
 btn_pesquisa.grid()
 window.mainloop()

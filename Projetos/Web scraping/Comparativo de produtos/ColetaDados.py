@@ -5,16 +5,11 @@ import numpy
 #ajuda para fazer pausas durante as requisições
 import time
 
-#biblioteca para interface
-from tkinter import *
-from tkinter import ttk
-
 #Ferramentas para navegação em sites
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-
 
 class ColetaDadosSite():
     def __init__(self, nomeProduto):
@@ -110,7 +105,7 @@ class ColetaDadosSite():
         df = pd.concat([df_amz, df_ali], ignore_index=True)
         print(df)
 
-def executa_class():
+def executa_class(produto):
     produto = input('Escreva o nome do produto que deseja pesquisar: ')
     novo = ColetaDadosSite(produto)
     novo.iniciar_navegador()

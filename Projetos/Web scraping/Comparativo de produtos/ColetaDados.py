@@ -12,6 +12,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 
 class ColetaDadosSite():
+    df  = pd.DataFrame()
     def __init__(self, nomeProduto):
         self.nomeProduto = nomeProduto
 
@@ -102,11 +103,11 @@ class ColetaDadosSite():
     def dataFrame(self):
         df_amz = pd.DataFrame(self.prod_amz, columns= ['loja', 'nome', 'valor'])
         df_ali = pd.DataFrame(self.prod_ali, columns= ['loja', 'nome', 'valor'])
-        df = pd.concat([df_amz, df_ali], ignore_index=True)
-        print(df)
+        self.df = pd.concat([df_amz, df_ali], ignore_index=True)
+        print(self.df)
 
 def executa_class(produto):
-    produto = input('Escreva o nome do produto que deseja pesquisar: ')
+    #produto = input('Escreva o nome do produto que deseja pesquisar: ')
     novo = ColetaDadosSite(produto)
     novo.iniciar_navegador()
     novo.pesquisa_amz() 
@@ -115,5 +116,3 @@ def executa_class(produto):
     novo.coleta_dados_ali()
     novo.fechar_navegador()
     novo.dataFrame()
-
-executa_class()

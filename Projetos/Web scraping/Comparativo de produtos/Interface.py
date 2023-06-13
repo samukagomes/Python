@@ -11,22 +11,23 @@ def comand_btn():
     novo.pesquisa_ali()
     novo.coleta_dados_ali()
     novo.fechar_navegador()
-    novo.dataFrame() 
-    win_df = novo.df
-    dados = ttk.Label(window,text=win_df.head()).pack()
-         
+    novo.dataFrame()
+    dados = ttk.Label(frame_df,text=novo.df).pack()
+    
 
 window = Tk()
+frame1 = ttk.Frame(window)
 window.geometry('700x300')
+
 texto = ttk.Label(text='Escreva o produto que deseja pesquisar:', font=('Roboto', 12))
-texto.pack()
-
 nome_produto = ttk.Entry(window, width=25)
-nome_produto.pack()
-
 btn = ttk.Button(window, text='Pesquisar', command=comand_btn)
-btn.pack()
+frame_df = ttk.Frame(window, borderwidth=5, relief="ridge", width=200, height=100)
 
-#win_df = pd.DataFrame(columns=['Loja', 'Nome', 'valor'])
+frame1.grid(column=0, row=0)
+texto.grid(column=1, row=1)
+nome_produto.grid(column=1, row=2)
+btn.grid(column=1, row=3)
+frame_df.grid(column=1, row=4)
 
 window.mainloop()

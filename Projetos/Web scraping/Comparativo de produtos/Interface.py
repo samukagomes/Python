@@ -12,22 +12,27 @@ def comand_btn():
     novo.coleta_dados_ali()
     novo.fechar_navegador()
     novo.dataFrame()
-    dados = ttk.Label(frame_df,text=novo.df).pack()
-    
+    lb_df_loja = ttk.Label(frame_df, text=novo.df['loja'])
+    lb_df_nome = ttk.Label(frame_df, text=novo.df['nome'])
+    lb_df_valor = ttk.Label(frame_df, text=novo.df['valor'])
 
+    lb_df_loja.grid(column=0, row=0)
+    lb_df_nome.grid(column=1, row=0)
+    lb_df_valor.grid(column=2, row=0)
+    
 window = Tk()
-frame1 = ttk.Frame(window)
+window.title('Coleta de dados')
 window.geometry('700x300')
 
-texto = ttk.Label(text='Escreva o produto que deseja pesquisar:', font=('Roboto', 12))
+lb_texto = ttk.Label(text='Escreva o produto que deseja pesquisar:', font=('Roboto', 12))
 nome_produto = ttk.Entry(window, width=25)
-btn = ttk.Button(window, text='Pesquisar', command=comand_btn)
-frame_df = ttk.Frame(window, borderwidth=5, relief="ridge", width=200, height=100)
+btn_pesquisar = ttk.Button(window, text='Pesquisar', command=comand_btn)
+frame_df = ttk.Frame(window, borderwidth=5, relief="ridge", width=350, height=100)
 
-frame1.grid(column=0, row=0)
-texto.grid(column=1, row=1)
-nome_produto.grid(column=1, row=2)
-btn.grid(column=1, row=3)
-frame_df.grid(column=1, row=4)
+
+lb_texto.grid(column=0, row=0, padx=175,pady=[50,10])
+nome_produto.grid(column=0, row=1)
+btn_pesquisar.grid(column=0, row=2, pady=10)
+frame_df.grid(column=0, row=3)
 
 window.mainloop()

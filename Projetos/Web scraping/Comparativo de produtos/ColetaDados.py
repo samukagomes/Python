@@ -47,7 +47,7 @@ class ColetaDadosSite():
             #se caso der erro, vai coletar a msg de erro
             try:
                 if len(self.prod_amz['nome']) >= 3: break
-                self.prod_amz['nome'].append('R$'+i.text)
+                self.prod_amz['nome'].append(i.text)
             except:
                 self.prod_amz.append('Deu erro no numero'+str(i))
        
@@ -55,7 +55,7 @@ class ColetaDadosSite():
         for i in valor:
             try:
                 if len(self.prod_amz['valor']) >= 3: break 
-                self.prod_amz['valor'].append(i.text)
+                self.prod_amz['valor'].append('R$: '+i.text)
             except:
                 print('erro')
 

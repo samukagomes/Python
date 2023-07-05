@@ -8,8 +8,9 @@ import time
 # Ferramentas para navegação em sites
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+
 
 
 class ColetaDadosSite:
@@ -19,9 +20,11 @@ class ColetaDadosSite:
         self.nomeProduto = nomeProduto
 
     def iniciar_navegador(self):
+        opts = Options()
+        opts.add_argument('--headless=new')#cria a opção de ocultar a janela
         # Instala o driver atual do google chrome e inicializa
         servico = Service(ChromeDriverManager().install())
-        self.navegador = webdriver.Chrome(service=servico)
+        self.navegador = webdriver.Chrome(service=servico, options=opts)
 
     def pesquisa_amz(self):
         # entra e realiza a pesquisa no site
@@ -128,7 +131,6 @@ class ColetaDadosSite:
 
 
 def executa_class(produto):
-    # produto = input('Escreva o nome do produto que deseja pesquisar: ')
     novo = ColetaDadosSite(produto)
     novo.iniciar_navegador()
     novo.pesquisa_amz()
@@ -137,3 +139,6 @@ def executa_class(produto):
     novo.coleta_dados_ali()
     novo.fechar_navegador()
     novo.dataFrame()
+
+prod = input('Escreva o nome do produto que deseja pesquisar: ')
+executa_class(prod)

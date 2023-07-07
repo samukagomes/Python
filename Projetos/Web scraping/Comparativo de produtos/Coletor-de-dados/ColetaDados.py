@@ -12,7 +12,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
 
-
 class ColetaDadosSite:
     df = pd.DataFrame()
 
@@ -21,7 +20,7 @@ class ColetaDadosSite:
 
     def iniciar_navegador(self):
         opts = Options()
-        opts.add_argument('--headless=new')#cria a opção de ocultar a janela
+        opts.add_argument("--headless=new")  # cria a opção de ocultar a janela
         # Instala o driver atual do google chrome e inicializa
         servico = Service(ChromeDriverManager().install())
         self.navegador = webdriver.Chrome(service=servico, options=opts)
@@ -130,7 +129,8 @@ class ColetaDadosSite:
         print(self.df)
 
 
-def executa_class(produto):
+
+def executa_class(produto, df):
     novo = ColetaDadosSite(produto)
     novo.iniciar_navegador()
     novo.pesquisa_amz()
@@ -138,7 +138,7 @@ def executa_class(produto):
     novo.pesquisa_ali()
     novo.coleta_dados_ali()
     novo.fechar_navegador()
-    novo.dataFrame()
+    df = novo.dataFrame()
 
-prod = input('Escreva o nome do produto que deseja pesquisar: ')
-executa_class(prod)
+# prod = input('Escreva o nome do produto que deseja pesquisar: ')
+# executa_class(prod)

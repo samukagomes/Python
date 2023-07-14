@@ -126,11 +126,11 @@ class ColetaDadosSite:
         df_amz = pd.DataFrame(self.prod_amz, columns=["loja", "nome", "valor"])
         df_ali = pd.DataFrame(self.prod_ali, columns=["loja", "nome", "valor"])
         self.df = pd.concat([df_amz, df_ali], ignore_index=True)
-        print(self.df)
+        print (self.df)
 
 
 
-def executa_class(produto, df):
+def executa_class(produto):
     novo = ColetaDadosSite(produto)
     novo.iniciar_navegador()
     novo.pesquisa_amz()
@@ -138,7 +138,6 @@ def executa_class(produto, df):
     novo.pesquisa_ali()
     novo.coleta_dados_ali()
     novo.fechar_navegador()
-    df = novo.dataFrame()
-
+    novo.dataFrame()
 # prod = input('Escreva o nome do produto que deseja pesquisar: ')
 # executa_class(prod)

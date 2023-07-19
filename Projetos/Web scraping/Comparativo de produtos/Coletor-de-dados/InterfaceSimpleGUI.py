@@ -8,7 +8,7 @@ from PySimpleGUI import (Window, Text, Input,
 layout_esquerda = [
     [Push(),Text('Escreva o nome de um produto:'),Push()], 
     [Input(key='-PESQUISA-')],
-    [Push(),Button('Enviar', key='-ENVIAR-'),Push()]
+    [Push(),Button('Enviar', key='-ENVIAR-'), Button('Exportar'),Push()]
     ]
 
 layout_direita = [
@@ -20,7 +20,7 @@ layout = [
     [Column(layout_esquerda)], [HSeparator()], [Column(layout_direita)]
     ]
 
-window=Window("Coleta de dados", layout=layout )
+window=Window("Coleta de dados" , size=[800,200], layout=layout, element_justification="center")
 
 def webScraping(produto):
     novo = cd.ColetaDadosSite(produto)
@@ -39,10 +39,11 @@ def webScraping(produto):
 while True:
     event, value = window.read()
     print(event, value)
-    
-    if event == None: break
-    if event == '-ENVIAR-': 
-        webScraping(value['-PESQUISA-'])
-        
+
+    match event:
+        case '-ENVIAR-':
+            webScraping(value['-PESQUISA-'])
+        case None:
+            break
 
 window.close()

@@ -128,6 +128,15 @@ class ColetaDadosSite:
         self.df = pd.concat([df_amz, df_ali], ignore_index=True)
         print (self.df)
 
+    def exportar_csv(self):
+        try: 
+            base = pd.read_csv('base-dados.csv')
+            arquivo_concatenado = pd.concat([base, self.df], ignore_index=True)
+            arquivo_concatenado.to_csv('base-dados.csv', index=False)
+            
+        except: self.df.to_csv('base-dados.csv', index=False)
+
+
 
 
 def executa_class(produto):
@@ -139,5 +148,7 @@ def executa_class(produto):
     novo.coleta_dados_ali()
     novo.fechar_navegador()
     novo.dataFrame()
-# prod = input('Escreva o nome do produto que deseja pesquisar: ')
-# executa_class(prod)
+    novo.exportar_csv()
+
+prod = input('Escreva o nome do produto que deseja pesquisar: ')
+executa_class(prod)

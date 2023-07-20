@@ -38,7 +38,7 @@ class ColetaDadosSite:
 
     def coleta_dados_amz(self):
         # Armazena informações sobre o produto pesquisado
-        self.prod_amz = {"loja": [], "nome": [], "valor": []}
+        self.prod_amz = {"loja": [], "nome-produto": [], "valor": [], 'produto-pesquisado': []}
 
         # coleta informações
         nome = list(
@@ -54,15 +54,19 @@ class ColetaDadosSite:
         for i in range(1, 4):
             self.prod_amz["loja"].append("Amazon")
 
+        # coleta o nome pesquisado
+        for i in range(1, 4):
+            self.prod_amz["produto-pesquisado"].append(self.nomeProduto)
+
         # coleta nome dos produtos
         for i in nome:
             # se caso der erro, vai coletar a msg de erro
             try:
-                if len(self.prod_amz["nome"]) >= 3:
+                if len(self.prod_amz["nome-produto"]) >= 3:
                     break
-                self.prod_amz["nome"].append(i.text)
+                self.prod_amz["nome-produto"].append(i.text)
             except:
-                self.prod_amz.append("Deu erro no numero" + str(i))
+                print("Deu erro no numero" + str(i))
 
         # coleta valor dos produtos
         for i in valor:
@@ -84,7 +88,7 @@ class ColetaDadosSite:
         time.sleep(2)
 
     def coleta_dados_ali(self):
-        self.prod_ali = {"loja": [], "nome": [], "valor": []}
+        self.prod_ali = {"loja": [], "nome-produto": [], "valor": [], "produto-pesquisado":[]}
 
         nome = self.navegador.find_elements(
             "xpath", '//*[@class="manhattan--titleText--WccSjUS"]'
@@ -97,12 +101,16 @@ class ColetaDadosSite:
         for i in range(1, 4):
             self.prod_ali["loja"].append("AliExpress")
 
+        # coleta o nome pesquisado
+        for i in range(1, 4):
+            self.prod_ali["produto-pesquisado"].append(self.nomeProduto)
+
         # coleta o nome dos produtos
         for i in nome:
             try:
-                if len(self.prod_ali["nome"]) >= 3:
+                if len(self.prod_ali["nome-produto"]) >= 3:
                     break
-                self.prod_ali["nome"].append(i.text)
+                self.prod_ali["nome-produto"].append(i.text)
             except:
                 print("Erro produto")
 
@@ -123,9 +131,9 @@ class ColetaDadosSite:
         self.navegador.close()
 
     def dataFrame(self):
-        df_amz = pd.DataFrame(self.prod_amz, columns=["loja", "nome", "valor"])
-        df_ali = pd.DataFrame(self.prod_ali, columns=["loja", "nome", "valor"])
-        self.df = pd.concat([df_amz, df_ali], ignore_index=True)
+        df_amz = pd.DataFrame(self.prod_amz, columns=["loja", "nome-produto", "valor", 'produto-pesquisado'])
+        df_ali = pd.DataFrame(self.prod_ali, columns=["loja", "nome-produto", "valor", 'produto-pesquisado'])
+        self.df = pd.concat([df_amz, df_ali], ignore_index= True)
         print (self.df)
 
     def exportar_csv(self):
@@ -133,8 +141,11 @@ class ColetaDadosSite:
             base = pd.read_csv('base-dados.csv')
             arquivo_concatenado = pd.concat([base, self.df], ignore_index=True)
             arquivo_concatenado.to_csv('base-dados.csv', index=False)
-            
-        except: self.df.to_csv('base-dados.csv', index=False)
+            print ('Arquivo exportado')
+
+        except: 
+            self.df.to_csv('base-dados.csv', index=False)
+
 
 
 
@@ -150,5 +161,5 @@ def executa_class(produto):
     novo.dataFrame()
     novo.exportar_csv()
 
-prod = input('Escreva o nome do produto que deseja pesquisar: ')
-executa_class(prod)
+# prod = input('Escreva o nome do produto que deseja pesquisar: ')
+# executa_class(prod.upper())

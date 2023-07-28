@@ -24,9 +24,7 @@ layout = [
     [Column(layout_esquerda)], [HSeparator()], [Column(layout_direita)]
     ]
 
-window=Window("Coleta de dados" , size=[800,200], layout=layout, element_justification="center")
-
-dados_df = pd.DataFrame()
+window=Window("Coleta de dados" , size=[800,300], layout=layout, element_justification="center")
 
 def webScraping(produto):
     pesquisa = cd.ColetaDadosSite(produto)
@@ -42,7 +40,6 @@ def webScraping(produto):
     window['-NOME-'].update(pesquisa.df['nome-produto'])
     window['-VALOR-'].update(pesquisa.df['valor'])
 
-
 while True:
     #lê os eventos e valores da janela
     event, value = window.read()
@@ -54,7 +51,7 @@ while True:
             if value['-PESQUISA-'] == '':
                 window['-LABEL1-'].Update(text_color = "red")
             else:
-                window['-LABEL1-'].Update(text_color = "Black")
+                window['-LABEL1-'].Update(text_color = "White")
                 webScraping(value['-PESQUISA-'.upper()])
         case None:
             break

@@ -11,11 +11,7 @@ def index():
 def login():
     return render_template('login.html')
 
-app.route('/cadastro')
-def cadastro():
-    return render_template('cadastro.html')
-
-@app.route('/user/<user>')
+@app.route('/Admin/<user>')
 def usuario(user):
     return f'Usuario: {user}'
 

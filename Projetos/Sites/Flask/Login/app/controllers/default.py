@@ -1,19 +1,27 @@
-from flask import render_template
-from app import app
+from flask import render_template, request, redirect, url_for
+from app import app, db
 from app.models.tabelas import User
 
-# from app.models.forms import loginForm
 #as rotas dos sites são definidos por funções
 #direciona ao index pela rota "/" ou "/index"
-@app.route('/')
-@app.route('/index')
-def index():
-    return render_template('base.html')
-
+# @app.route('/')
+# @app.route('/index')
+# def index():
+#     return render_template('base.html')
 
 @app.route('/login/')
 def login():
-    # form = loginForm()
     return render_template('login.html')
 
+@app.route('/login/', methods=['POST'])
+def validation():
+    n1 = request.form.get('email')
+    print(n1)
 
+    return render_template('admin.html')
+
+
+# @app.route('/admin')
+# def admin():
+#      users = User.query.all()
+#      return render_template('admin.html', users = users)

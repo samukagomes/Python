@@ -3,21 +3,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 mt-5">
+            {%for e in users%}
             <ul class="list-group">
                 <li class="list-group-item list-group-item-action">
                     <input type="checkbox" class="form-check-input me-1">
-                    <label class="form-check-label">1</label>
-                    <label class="form-check-label">abacate</label>
+                    <label class="form-check-label">{{e.id}}</label>
+                    <label class="form-check-label">{{e.nome}}</label>
                 </li>
 
             </ul>
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-action">
-                    <input type="checkbox" class="form-check-input me-1">
-                    <label class="form-check-label">1</label>
-                    <label class="form-check-label">maçã</label>
-                </li>
-            </ul>
+            {%endfor%}
         </div>
     </div>
 

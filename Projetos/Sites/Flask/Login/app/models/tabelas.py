@@ -1,9 +1,8 @@
 from app import db
 
-class User(db.Model):
-    __tablename__= 'user'
-    
-    id = db.Column(db.Integer, primary_key=True)
+class User(db.Model):    
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String)
     senha = db.Column(db.String)
     email = db.Column(db.String, unique=True)
@@ -15,5 +14,3 @@ class User(db.Model):
         self.senha = senha
         self.admin = admin
         
-    def __repr__ (self):
-        return "<User %r>" % self.nome

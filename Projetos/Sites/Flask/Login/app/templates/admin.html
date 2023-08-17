@@ -1,20 +1,71 @@
 {%extends 'base.html'%}
+{%block titulo%}Admin{%endblock%}
 {%block conteudo%}
 <div class="container">
-    <div class="row">
-        <div class="col-md-12 mt-5">
-            {%for e in users%}
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-action">
-                    <input type="checkbox" class="form-check-input me-1">
-                    <label class="form-check-label">{{e.id}}</label>
-                    <label class="form-check-label">{{e.nome}}</label>
-                </li>
 
-            </ul>
-            {%endfor%}
+    <h3 class="mb-5 mt-5">Base de usuarios:</h3>
+    <!-- Botões -->
+    <div class="text-center">
+        <div class="row">
+            <div class="col-4">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-primary">Inserir</button>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-warning">Atualizar</button>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-danger">Deletar</button>
+                </div>
+            </div>
         </div>
     </div>
-
+        
+    <div class="row mt-5">
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Senha</th>
+                    <th scope="col">Perfil</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for e in users %}
+                <tr>
+                    <th scope="row">
+                        <input type="checkbox" class="form-check-input me-1 ">
+                    </th>
+                    <th scope="row">
+                        <label class="form-check-label">{{e.id}}</label>
+                    </th>
+                    <th scope="row">
+                        <label class="form-check-label">{{e.nome}}</label>
+                    </th>
+                    <th scope="row">
+                        <label class="form-check-label">{{e.email}}</label>
+                    </th>
+                    <th scope="row">
+                        <label class="form-check-label">{{e.senha}}</label>
+                    </th>
+                    <th scope="row">
+                        <label class="form-check-label">
+                            {% if e.admin == 1 %} 
+                                Admin
+                            {% endif %}
+                        </label>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {%endblock%}

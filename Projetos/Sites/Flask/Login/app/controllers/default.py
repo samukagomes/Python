@@ -5,9 +5,9 @@ from app.models.tabelas import User
 #as rotas dos sites são definidos por funções
 #direciona ao index pela rota "/" ou "/index"
 @app.route('/')
-@app.route('/index')
+@app.route('/index/')
 def index():
-    return render_template('base.html')
+    return redirect ('/login/')
 
 @app.route('/login/')
 def login():
@@ -20,7 +20,9 @@ def validation():
     senha = request.form.get('senha')
     #se o email e a senha for igual a do banco, ira redirecionar para a pagina de admin
     if User.query.filter(User.email.like(email)).all() and User.query.filter(User.senha.like(senha)).all():
-        return redirect('/admin')
+        if User.query.filter_by(email = email, admin= 1).all():
+            return redirect('/admin')
+        else: return '<h3>Você não tem acesso de administrador</h3>'
     else:
         alert = 'erro'
         msg = 'O campo email ou senha está incorreto!'

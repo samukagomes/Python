@@ -33,3 +33,14 @@ def validation():
 def admin():
      users = User.query.all()
      return render_template('admin.html', users = users)
+
+@app.route('/admin', methods = ['GET', 'POST'])
+def cadastrar ():
+    if request.method == 'POST':
+        user = User(nome=request.form.get('nome'), 
+                    email=request.form.get('email'), 
+                    senha=request.form.get('senha'), 
+                    admin=request.form.get('admin'))
+        db.session.add(user)
+        db.session.commit()
+    return 'Deu certo'

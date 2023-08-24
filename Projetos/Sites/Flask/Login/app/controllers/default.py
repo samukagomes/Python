@@ -22,7 +22,10 @@ def validation():
     if User.query.filter(User.email.like(email)).all() and User.query.filter(User.senha.like(senha)).all():
         if User.query.filter_by(email = email, admin= 1).all():
             return redirect('/admin')
-        else: return '<h3>Você não tem acesso de administrador</h3>'
+        else: 
+            alert = 'erro'
+            msg = 'Você não tem acesso de administrador!'
+            return render_template('login.html', alert = alert, msg = msg)
     else:
         alert = 'erro'
         msg = 'O campo email ou senha está incorreto!'
@@ -32,7 +35,7 @@ def validation():
 @app.route('/admin')
 def admin():
      users = User.query.all()
-     return render_template('admin.html', users = users)
+     return render_template('admin.html', users = users, inserir = False)
 
 @app.route('/admin', methods = ['GET', 'POST'])
 def cadastrar ():
@@ -43,4 +46,17 @@ def cadastrar ():
                     admin=request.form.get('admin'))
         db.session.add(user)
         db.session.commit()
-    return 'Deu certo'
+    return render_template('/admin')
+
+def inserir():
+    return render_template('\admin', inserir=True)
+# @app.route('/admin', methods = ['GET', 'POST'])
+# def deletar ():
+#     if request.method == 'POST':
+#         user = User(nome=request.form.get('nome'), 
+#                     email=request.form.get('email'), 
+#                     senha=request.form.get('senha'), 
+#                     admin=request.form.get('admin'))
+#         db.session.add(user)
+#         db.session.commit()
+#     return 'Deu certo'

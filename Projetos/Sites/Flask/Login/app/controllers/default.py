@@ -35,9 +35,9 @@ def validation():
 @app.route('/admin')
 def admin():
      users = User.query.all()
-     return render_template('admin.html', users = users, inserir = False)
+     return render_template('admin.html', users = users)
 
-@app.route('/admin', methods = ['GET', 'POST'])
+@app.route('/admin/cadastrar', methods = ['GET', 'POST'])
 def cadastrar ():
     if request.method == 'POST':
         user = User(nome=request.form.get('nome'), 
@@ -46,17 +46,13 @@ def cadastrar ():
                     admin=request.form.get('admin'))
         db.session.add(user)
         db.session.commit()
-    return render_template('/admin')
+    return redirect('/admin')
 
-def inserir():
-    return render_template('\admin', inserir=True)
-# @app.route('/admin', methods = ['GET', 'POST'])
-# def deletar ():
-#     if request.method == 'POST':
-#         user = User(nome=request.form.get('nome'), 
-#                     email=request.form.get('email'), 
-#                     senha=request.form.get('senha'), 
-#                     admin=request.form.get('admin'))
-#         db.session.add(user)
-#         db.session.commit()
-#     return 'Deu certo'
+@app.route('/admin/<int:id>/delete', methods=['GET', 'POST'])
+def deletar(id):
+    user = db.get_or_404(User, id)
+
+    if request.method == 'POST':
+        db.session(user)
+        db.session.commit()
+    return redirect('/admin')

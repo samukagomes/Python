@@ -51,7 +51,6 @@ def cadastrar ():
 @app.route('/admin/<int:id>/delete', methods=['GET', 'POST'])
 def deletar(id):
     user = db.get_or_404(User, id)
-
     if request.method == 'POST':
         db.session(user)
         db.session.commit()

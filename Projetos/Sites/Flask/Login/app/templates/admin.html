@@ -10,7 +10,7 @@
             <div class="col-md-4 col-sm-12 mt-1">
                 <div class="d-grid gap-2">
                     <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" 
-                    data-bs-target="#offcanvas-cadastro" aria-controls="offcanvas-cadastro">Inserir</button>
+                    data-bs-target="#offcanvas-cadastro" aria-controls="offcanvas-cadastro">Cadastrar</button>
                 </div>
             </div>
             <div class="col-md-4 col-sm-12 mt-1">
@@ -31,7 +31,7 @@
     <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-cadastro" aria-labelledby="offcanvasTopLabel">
         <div class="container mt-3">
             <h3 class="offcanvas- title mb-3" id="offcanvasTopLabel">Cadastrar</h3>
-            <form action="/admin/cadastrar" method="POST">
+            <form action="/admin/create" method="POST">
                 <div class="row"> 
                     <div class="col-md-3 mt-1">
                         <input type="text" name="nome" id="nome" 
@@ -72,10 +72,10 @@
                 <div class="modal-header">
                     <h3 class="modal-title fs-5" id="offcanvasTopLabel">Deletar</h3>
                 </div>
-                <form action="/admin/{{user_id}}/deletar" method="POST">
+                <form action="/admin/delete" method="POST">
                     <div class="modal-body">
-                        <input type="number" class="form-control" 
-                        placeholder="ID:" value="{{id_user}}" required>
+                        <input type="number" name="user_id" class="form-control" 
+                        placeholder="ID:" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary"

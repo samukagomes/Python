@@ -37,8 +37,8 @@ def admin():
      users = User.query.all()
      return render_template('admin.html', users = users)
 
-@app.route('/admin/cadastrar', methods = ['GET', 'POST'])
-def cadastrar ():
+@app.route('/admin/create', methods = ['GET', 'POST'])
+def create ():
     if request.method == 'POST':
         user = User(nome=request.form.get('nome'), 
                     email=request.form.get('email'), 
@@ -48,10 +48,15 @@ def cadastrar ():
         db.session.commit()
     return redirect('/admin')
 
-@app.route('/admin/<int:id>/delete', methods=['GET', 'POST'])
-def deletar(id):
-    user = db.get_or_404(User, id)
-    if request.method == 'POST':
-        db.session(user)
-        db.session.commit()
-    return redirect('/admin')
+@app.route('/admin/delete', methods=['GET', 'POST'])
+def delete():
+    user_id = request.form.get('user_id')
+    if User.query.filter(User.id.like(user_id)).all():
+        user = db.get_or_404(User, user_id)
+        if request.method == 'POST':
+                db.session.delete(user)
+                db.session.commit()
+                return redirect('/admin')
+    else:
+        return 'Deu ruim. Não tem esse id'
+    

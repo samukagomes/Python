@@ -7,17 +7,20 @@
     <!-- Botões -->
     <div class="text-center">
         <div class="row">
+            <!-- Btn cadastrar -->
             <div class="col-md-4 col-sm-12 mt-1">
                 <div class="d-grid gap-2">
                     <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" 
                     data-bs-target="#offcanvas-cadastro" aria-controls="offcanvas-cadastro">Cadastrar</button>
                 </div>
             </div>
+            <!-- Btn Atualizar -->
             <div class="col-md-4 col-sm-12 mt-1">
                 <div class="d-grid gap-2">
                     <button type="button" class="btn btn-warning">Atualizar</button>
                 </div>
             </div>
+            <!-- Btn Deletar -->
             <div class="col-md-4 col-sm-12 mt-1">
                 <div class="d-grid gap-2">
                     <button type="button" class="btn btn-danger" 
@@ -29,8 +32,10 @@
     
     <!-- Formulario Cadastrar -->
     <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-cadastro" aria-labelledby="offcanvasTopLabel">
-        <div class="container mt-3">
-            <h3 class="offcanvas- title mb-3" id="offcanvasTopLabel">Cadastrar</h3>
+        <div class="offcanvas-header">
+            <h3 class="offcanvas-title" id="offcanvasTopLabel">Cadastrar</h3>
+        </div>
+        <div class="offcanvas-body">
             <form action="/admin/create" method="POST">
                 <div class="row"> 
                     <div class="col-md-3 mt-1">
@@ -50,13 +55,14 @@
                         class="form-control" placeholder="Permição:" required>
                     </div>
                 </div>
-                
+        
+          
                 <div class="row text-center">
-                    <div class="col-md-6 col-sm-12 d-grid gap-2 mt-2">
+                    <div class="col-md-6 d-grid gap-2 mt-2">
                         <button type="button" class="btn btn-secondary" 
                         data-bs-dismiss="offcanvas" aria-label="Close">Cancelar</button>
                     </div>
-                    <div class="col-md-6 col-sm-12 d-grid gap-2 mt-2">
+                    <div class="col-md-6 d-grid gap-2 mt-2">
                         <button type="submit" class="btn btn-primary"
                         id="enviar" name="enviar">Cadastrar</button>
                     </div>
@@ -66,11 +72,11 @@
     </div>
         
     <!-- Deletar -->
-    <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="modal-delete" aria-hidden="true">
+    <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="modal-delete" aria-hidden="true" data-bs-theme="dark">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title fs-5" id="offcanvasTopLabel">Deletar</h3>
+                    <h3 class="modal-title fs-5 text-light" id="offcanvasTopLabel">Deletar</h3>
                 </div>
                 <form action="/admin/delete" method="POST">
                     <div class="modal-body">
@@ -82,7 +88,7 @@
                         data-bs-dismiss="modal">Cancelar</button>
                         
                         <button type="submit" class="btn btn-outline-danger"
-                        id="enviar" name="enviar">Deletar</button>
+                        id="deletar" name="deletar">Deletar</button>
                     </div>
                 </form>
             </div>
@@ -130,6 +136,5 @@
             </tbody>
         </table>
     </div>
-
 </div>
 {%endblock%}

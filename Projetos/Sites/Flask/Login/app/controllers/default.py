@@ -1,6 +1,9 @@
 from flask import render_template, request, redirect, url_for
 from app import app, db
 from app.models.tabelas import User
+import httpx
+
+client = None
 
 #as rotas dos sites são definidos por funções
 #direciona ao index pela rota "/" ou "/index"
@@ -37,6 +40,7 @@ def admin():
      users = User.query.all()
      return render_template('admin.html', users = users)
 
+
 @app.route('/admin/create', methods = ['GET', 'POST'])
 def create ():
     if request.method == 'POST':
@@ -47,6 +51,7 @@ def create ():
         db.session.add(user)
         db.session.commit()
     return redirect('/admin')
+
 
 @app.route('/admin/delete', methods=['GET', 'POST'])
 def delete():
@@ -59,4 +64,3 @@ def delete():
                 return redirect('/admin')
     else:
         return 'Deu ruim. Não tem esse id'
-    

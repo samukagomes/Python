@@ -64,3 +64,14 @@ def delete():
                 return redirect('/admin')
     else:
         return 'Deu ruim. Não tem esse id'
+    
+@app.route('/admin/atualizar', methods=['GET', 'POST'])
+def atualizar():
+    user_id = int(request.form.get('att_id'))
+    if User.query.filter(User.id.like(user_id)).all():
+        select = request.form.get('select')
+
+
+        return select
+    else:
+        return 'id '+str(user_id)+' não encontrado'

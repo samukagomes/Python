@@ -80,22 +80,28 @@
                     <h1 class="modal-title fs-5">Atualizar</h1>
                 </div>
 
-                <form action="">
+                <form action="/admin/atualizar" method="POST">
                     <div class="modal-body">
                         <diV class="row">
                             <div class="col-md-9">
-                                <input class="form-control" type="number" name="att_id" id="att_id" placeholder="ID:">
+                                <input class="form-control" type="number" 
+                                name="att_id" id="att_id" placeholder="ID:" required>
                             </div>
                         </diV>
                         <div class="row mt-3">
                             <div class="col-md-9">
-                                <select class="form-select" name="select" id="select">
-                                    <option selected>Item</option>
+                                <select class="form-select" name="select" id="select" required>
+                                    <option selected></option>
                                     <option value="nome">Nome</option>
                                     <option value="email">E-mail</option>
                                     <option value="senha">Senha</option>
-                                    <option value="perfil">Perfil</option>
+                                    <option value="admin">Perfil</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="Alterar">
                             </div>
                         </div>
                     </div>

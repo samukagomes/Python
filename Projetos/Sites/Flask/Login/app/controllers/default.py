@@ -65,13 +65,29 @@ def delete():
     else:
         return 'Deu ruim. Não tem esse id'
     
-@app.route('/admin/atualizar', methods=['GET', 'POST'])
-def atualizar():
-    user_id = int(request.form.get('att_id'))
+@app.route('/admin/update', methods=['POST', 'GET'])
+def update():
+    user_id = request.form.get('att_id')
     if User.query.filter(User.id.like(user_id)).all():
         select = request.form.get('select')
+        alterar = request.form.get('alterar')
 
-
-        return select
+        match select:
+            case 'nome':
+                update_row = User.query.filter_by(id=user_id).update(dict(nome=alterar))
+                db.session.commit()
+                return redirect('/admin')
+            case 'email':
+                update_row = User.query.filter_by(id=user_id).update(dict(email=alterar))
+                db.session.commit()
+                return redirect('/admin')
+            case 'senha':
+                update_row = User.query.filter_by(id=user_id).update(dict(senha=alterar))
+                db.session.commit()
+                return redirect('/admin')
+            case 'perfil':
+                update_row = User.query.filter_by(id=user_id).update(dict(admin=alterar))
+                db.session.commit()
+                return redirect('/admin')
     else:
         return 'id '+str(user_id)+' não encontrado'

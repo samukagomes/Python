@@ -80,7 +80,7 @@
                     <h1 class="modal-title fs-5">Atualizar</h1>
                 </div>
 
-                <form action="/admin/atualizar" method="POST">
+                <form action="/admin/update" method="post">
                     <div class="modal-body">
                         <diV class="row">
                             <div class="col-md-9">
@@ -95,13 +95,13 @@
                                     <option value="nome">Nome</option>
                                     <option value="email">E-mail</option>
                                     <option value="senha">Senha</option>
-                                    <option value="admin">Perfil</option>
+                                    <option value="perfil">Perfil</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="Alterar">
+                                <input type="text" class="form-control" id="alterar" name="alterar" placeholder="Alterar">
                             </div>
                         </div>
                     </div>

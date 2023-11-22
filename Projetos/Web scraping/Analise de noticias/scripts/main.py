@@ -15,9 +15,10 @@ class reportagem():
     def g1(self):
         div = self.soup_g1.find_all('div', 'widget--info__text-container', limit=2)
 
+        self.site = {}
         link=div[0].find('a')
-
-        print(link.get('href'))
+        self.site['link'] = link
+        print(self.site)
 
 
 endpoint = input('escreva o tema da noticia que deseja pesquisar: ')
